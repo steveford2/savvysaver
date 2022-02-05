@@ -19,7 +19,13 @@ body {
   */
   /* rtl:remove */
   z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  padding: 0;
+}
+
+.logo {
+  /* width: 60px; */
+  height: 60px;
+  object-fit: contain;
 }
 
 .b-example-divider {
@@ -69,19 +75,29 @@ body {
   color: #000000;
 }
 
-.nav-link {
+.nav-pills .nav-link.active {
+  color: rgba(0, 0, 0, .85);
+  background-color: #EDEDE8;
+}
+
+.nav-pills .nav-link {
   /* display: inline-flex; */
-  align-items: center;
+  border-radius: 0;
+  text-align: left;
   padding-left: 3rem;
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 14px !important;
-  line-height: 16px;
-  color: rgba(0, 0, 0, .65);
+  color: rgba(0, 0, 0, 0.9);
   background-color: transparent;
   border: 0;
-  color: #000000;
+}
+
+
+
+.nav-link {
+  padding: 1rem 1rem;
 }
 
 .nav-item-collapse {
