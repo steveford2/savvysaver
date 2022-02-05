@@ -40,7 +40,7 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container-fluid col-lg-8">
+    <div class="container-fluid col-lg-10">
       <div class="row">
         <div class="flex-shrink-0 col-lg-2 sidebar">
           <div class="logo pl-2 pb-2">
@@ -49,6 +49,7 @@
           <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
             <button class="nav-link" id="v-pills-mySpend-tab" data-bs-toggle="pill" data-bs-target="#v-pills-mySpend" type="button" role="tab" aria-controls="v-pills-mySpend" aria-selected="false">My Spend</button>
+            <button class="nav-link" id="v-pills-codeSpend-tab" data-bs-toggle="pill" data-bs-target="#v-pills-myBudget" type="button" role="tab" aria-controls="v-pills-myBudget" aria-selected="false">My Budget</button>
             <button class="nav-link" id="v-pills-codeSpend-tab" data-bs-toggle="pill" data-bs-target="#v-pills-codeSpend" type="button" role="tab" aria-controls="v-pills-codeSpend" aria-selected="false">Code Spend</button>
             <button class="nav-link" id="v-pills-uploadBankData-tab" data-bs-toggle="pill" data-bs-target="#v-pills-uploadBankData" type="button" role="tab" aria-controls="v-pills-uploadBankData" aria-selected="false">Upload Bank Data</button>
             <button class="nav-link" id="v-pills-myAccount-tab" data-bs-toggle="pill" data-bs-target="#v-pills-myAccount" type="button" role="tab" aria-controls="v-pills-myAccount" aria-selected="false">My Account</button>
@@ -188,6 +189,13 @@
                     </table>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- My Budget tab content -->
+            <div class="tab-pane fade" id="v-pills-myBudget" role="tabpanel" aria-labelledby="v-pills-myBudget-tab">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                <h1 class="h1 px-3">My Budget</h1>
               </div>
             </div>
 
