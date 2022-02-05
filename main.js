@@ -1287,6 +1287,11 @@
   function populateCodeSpendRows() {
     console.log('code spend rows');
     document.getElementById('codeSpendBody').innerHTML = '';
+    var body = document.getElementById('codeSpendBody');
+    var headerRow = document.createElement('tr');
+    headerRow.classList.add("code-headings");
+    headerRow.innerHTML = '<tr><td class="col-lg-4 px-4"><l>Check your expenses...</l></td><td class="col-lg-4 px-4"><l>Code them here...</l></td><td class="col-lg-2 px-4"><l>Lock it in!</l></td></tr>';
+    body.appendChild(headerRow);
     var options = '<option selected disabled>Select Category</option>';
     var catSelect2 = '</select>';
     expenseCategories.forEach((category) => {
@@ -1296,7 +1301,6 @@
 
     processedTransactions.forEach((transaction) => {
       if (transaction.Category === 'Not Coded')  {
-        var body = document.getElementById('codeSpendBody');
         var row = document.createElement('tr');
         var transactionID = transaction.TransactionID.toString();
         row.setAttribute('id', transactionID)
