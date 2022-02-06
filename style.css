@@ -396,3 +396,20 @@ option {
 .code-select {
   border-radius: 1rem;
 }
+
+.btn-save-budget {
+  font-weight: 600;
+  background-color: #FFF;
+}
+
+.form-control {
+  border: none;
+}
+
+.input-group-text {
+  border: none;
+}
+
+.budget-select {
+  border: none !important;
+}

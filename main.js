@@ -30,25 +30,25 @@
   ];
 
   var spendTypes = [
-    "Obligatory Spend",
+    "Living Costs",
     "Luxury Spend",
     "Annual Provisions",
     "Savings"
   ]
 
   var categoryMatcher = {
-    "Home": "Obligatory Spend",
+    "Home": "Living Costs",
     "Entertainment": "Luxury Spend",
-    "Groceries": "Obligatory Spend",
-    "Transport": "Obligatory Spend",
-    "Fitness/ Sport": "Annual Provisions",
+    "Groceries": "Living Costs",
+    "Transport": "Living Costs",
+    "Fitness/ Sport": "Luxury Spend",
     "Dining Out": "Luxury Spend",
     "Travel": "Luxury Spend",
     "Shopping": "Luxury Spend",
-    "Subscriptions": "Annual Provisions",
-    "Bills": "Obligatory Spend",
-    "Rent/ Mortgage": "Annual Provisions",
-    "General": "Obligatory Spend",
+    "Subscriptions": "Luxury Spend",
+    "Bills": "Living Costs",
+    "Rent/ Mortgage": "Living Costs",
+    "General": "Living Costs",
     "Not Coded": "Not Coded",
     "Salary/ Wage": "Income",
     "Other Income": "Income",
@@ -78,7 +78,7 @@
     type: 'doughnut',
     data: {
       labels: [
-        'Obligatory Spend',
+        'Living Costs',
         'Luxury Spend',
         'Annual Provisions',
         'Savings',
@@ -120,7 +120,7 @@
     type: 'doughnut',
     data: {
       labels: [
-        'Obligatory Spend',
+        'Living Costs',
         'Luxury Spend',
         'Annual Provisions',
         'Savings',
@@ -151,7 +151,7 @@
     type: 'doughnut',
     data: {
       labels: [
-        'Obligatory Spend',
+        'Living Costs',
         'Luxury Spend',
         'Annual Provisions',
         'Savings',
@@ -1347,6 +1347,68 @@
       }
     });
   }
+
+  //My Budget Page
+
+  function populateBudgetTables() {
+
+    var livingCostsTable = document.getElementById("livingCostsTable");
+    var luxurySpendTable = document.getElementById("luxurySpendTable");
+
+    var livingCostsRowHTML = '';
+    var LuxurySpendRowHTML = '';
+    var htmlStart = '<tr>';
+    var html1 = '<td width="45%"><table><tr><td><div class="px-1"><svg width="60" height="60" fill="';
+    //colour code
+    var html2 = '" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="30"/></svg></div></td><td><b class="ms-1">';
+    //category name
+    var html3 = '</b><div class="input-group px-1"><div class="input-group-prepend"><span class="input-group-text" id="">$</span></div><input id="';
+    //input category ID
+    var html4 = '" type="number" min="0" class="form-control" value='
+    //category value
+    var html5 = '></div></td><td><div class="px-1"><b>Per</b><select id="';
+    //select frequency ID
+    var html6 = '" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week" selected>Week</option><option value="Fortnight">Fortnight</option><option value="Month">Month</option><option value=""Year>Year</option></select></div></td></tr></table></td>';
+    var htmlMiddle = '<td width="10%"></td>';
+    var htmlEnd = '</tr><br>'
+    
+    
+    var LCcount = 1;
+    var LScount = 1;
+
+    expenseCategories.forEach((category) => {
+      var inputID = category;
+        var selectID = category.concat('Select');
+      if (categoryMatcher[category] == 'Living Costs') {
+
+        if (LCcount == 1) {
+          livingCostsRowHTML = livingCostsRowHTML.concat(htmlStart, html1, colourRef[category], html2, category, html3, inputID, html4, categoryGoals[category], html5, selectID, html6, htmlMiddle);
+          LCcount = 2;
+        } else {
+          livingCostsRowHTML = livingCostsRowHTML.concat(html1, colourRef[category], html2, category, html3, inputID, html4, categoryGoals[category], html5, selectID, html6, htmlEnd);
+          LCcount = 1;
+        }
+      }
+      if (categoryMatcher[category] == 'Luxury Spend') {
+
+        if (LScount == 1) {
+          LuxurySpendRowHTML = LuxurySpendRowHTML.concat(htmlStart, html1, colourRef[category], html2, category, html3, inputID, html4, categoryGoals[category], html5, selectID, html6, htmlMiddle);
+          LScount = 2;
+        } else {
+          LuxurySpendRowHTML = LuxurySpendRowHTML.concat(html1, colourRef[category], html2, category, html3, inputID, html4, categoryGoals[category], html5, selectID, html6, htmlEnd);
+          LScount = 1;
+        }
+      }
+    })
+    var LCbody = document.createElement("tbody");
+    LCbody.innerHTML = livingCostsRowHTML;
+    livingCostsTable.appendChild(LCbody);
+
+    var LSbody = document.createElement("tbody");
+    LSbody.innerHTML = LuxurySpendRowHTML;
+    luxurySpendTable.appendChild(LSbody);
+  }
+  populateBudgetTables();
 
   populateCodeSpendRows();
   // populateCategorySelect(expenseCategories);
