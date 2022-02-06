@@ -68,7 +68,7 @@
     "Bills": 600,
     "Rent/ Mortgage": 1050,
     "General": 2500,
-    "Savings": 500
+    "Savings": 0
   }
 
   // Charts
@@ -1414,11 +1414,11 @@
     //category name
     var html3 = '</b><div class="input-group px-1"><div class="input-group-prepend"><span class="input-group-text" id="">$</span></div><input id="';
     //input category ID
-    var html4 = '" type="number" min="0" class="form-control" value='
+    var html4 = '" name="budgetInput" type="number" min="0" class="form-control" value='
     //category value
     var html5 = '></div></td><td><div class="px-1"><b>Per</b><select id="';
     //select frequency ID
-    var html6 = '" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week" selected>Week</option><option value="Fortnight">Fortnight</option><option value="Month">Month</option><option value=""Year>Year</option></select></div></td></tr></table></td>';
+    var html6 = '" name="budgetSelect" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week" selected>Week</option><option value="Fortnight">Fortnight</option><option value="Month">Month</option><option value="Year">Year</option></select></div></td></tr></table></td>';
     var htmlMiddle = '<td width="5%"></td>';
     var htmlEnd = '</tr><br>'
     
@@ -1459,6 +1459,57 @@
     luxurySpendTable.appendChild(LSbody);
   }
   populateBudgetTables();
+
+  var adjustedGoals = categoryGoals;
+  var income = 0;
+
+  var frequencyLookUpVals = {
+    'Week': 4.3,
+    'Fortnight': 2.15,
+    'Month': 1,
+    'Year': 0.0833
+  }
+  
+  function sumAdjustedBudget() {
+    var inputs = document.getElementsByName('budgetInput');
+    inputs.forEach((input) => {
+      var freqID = input.id.concat('Select');
+      var frequency = document.getElementById(freqID).value;
+      var frequencyMultiplier = frequencyLookUpVals[frequency];
+      if (input.id == 'Income') {
+        income = input.value * frequencyMultiplier;
+      } else {
+        adjustedGoals[input.id] = input.value * frequencyMultiplier;
+      }
+    });
+    var adjustedAmmount = 0;
+    for (const [key, value] of Object.entries(adjustedGoals)) {
+      if (adjustedGoals[key]) {
+        adjustedAmmount = adjustedAmmount + adjustedGoals[key];
+      }
+    }
+
+    adjustedAmmount = Math.round(income - adjustedAmmount);
+    chartBudget.data.datasets[1].data = [0, adjustedAmmount];
+    chartBudget.update();
+  }
+
+  function addBudgetEventListeners() {
+    var inputs = document.getElementsByName('budgetInput');
+    inputs.forEach((input) => {
+      input.addEventListener("change", function(e) {
+        sumAdjustedBudget();
+      });
+    });
+    var selects = document.getElementsByName('budgetSelect');
+    selects.forEach((select) => {
+      select.addEventListener("change", function(e) {
+        sumAdjustedBudget();
+      });
+    });
+    console.log(adjustedGoals);
+  }
+  addBudgetEventListeners();
 
   populateCodeSpendRows();
   // populateCategorySelect(expenseCategories);
