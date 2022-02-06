@@ -1360,7 +1360,7 @@
         var buttonID = 'button'.concat(transactionID);
         var catSelect1 = '<select id=' + selectID + ' name="codeSelect" class="form-select code-select shadow-none my-4" aria-label="Default select example">';
         var catSelect = catSelect1.concat(options, catSelect2);
-        var td1 = '<tr class="code-content"><td><div><table width="90%" class="code-inner m-2 shadow-sm"><tr></tr><td class="p-3">'+ date + '<br>' + transaction.Details + '<br><div class="code-amount">$ '+ transaction.Amount.toFixed(2) + '</div></td></tr></table></div></td><td><div><table width="90%" class="code-inner m-2 shadow-sm"><tr><td class="p-3">' + catSelect + '</td></tr></table></div></td><td><div" class="p-3"><button id=' + buttonID + ' name="codeButton" type="button" class="btn btn-outline-success btn-save-code m-4" disabled>✓</button></div></td></tr>';
+        var td1 = '<tr class="code-content"><td><div><table width="90%" class="code-inner m-2 code-box-shaddow"><tr></tr><td class="p-3">'+ date + '<br>' + transaction.Details + '<br><div class="code-amount">$ '+ transaction.Amount.toFixed(2) + '</div></td></tr></table></div></td><td><div><table width="90%" class="code-inner m-2 code-box-shaddow"><tr><td class="p-3">' + catSelect + '</td></tr></table></div></td><td><div" class="p-3"><button id=' + buttonID + ' name="codeButton" type="button" class="btn btn-outline-success btn-save-code m-4" disabled>✓</button></div></td></tr>';
         row.innerHTML = td1;
         body.appendChild(row);
 
@@ -1408,7 +1408,7 @@
     var livingCostsRowHTML = '';
     var LuxurySpendRowHTML = '';
     var htmlStart = '<tr>';
-    var html1 = '<td width="45%"><table><tr><td><div class="px-1"><svg width="60" height="60" fill="';
+    var html1 = '<td width="43%"><table><tr><td><div class="mx-3"><svg width="60" height="60" fill="';
     //colour code
     var html2 = '" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="30"/></svg></div></td><td><b class="ms-1">';
     //category name
@@ -1419,7 +1419,7 @@
     var html5 = '></div></td><td><div class="px-1"><b>Per</b><select id="';
     //select frequency ID
     var html6 = '" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week" selected>Week</option><option value="Fortnight">Fortnight</option><option value="Month">Month</option><option value=""Year>Year</option></select></div></td></tr></table></td>';
-    var htmlMiddle = '<td width="10%"></td>';
+    var htmlMiddle = '<td width="5%"></td>';
     var htmlEnd = '</tr><br>'
     
     

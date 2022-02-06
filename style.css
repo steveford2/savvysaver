@@ -397,6 +397,10 @@ option {
   border-radius: 1rem;
 }
 
+.code-box-shaddow {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.275)!important;
+}
+
 .btn-save-budget {
   font-weight: 600;
   background-color: #FFF;
