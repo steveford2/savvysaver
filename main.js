@@ -111,6 +111,7 @@
       }
     }
   });
+  
 
 
   var chartCategorySpendElement = document.getElementById('chartTypeCategories')
@@ -171,6 +172,55 @@
     options: {
       legend: {
         display: false
+      }
+    }
+  });
+
+  var chartBudgetElement = document.getElementById('budgetTrajectory')
+  // eslint-disable-next-line no-unused-vars
+  var chartBudget = new Chart(chartBudgetElement, {
+    type: 'line',
+    data: {
+      labels: [
+        '',
+        '12 Months'
+      ],
+      datasets: [{
+        label: 'Current Savings Projection',
+        data: [
+          0,
+          21345,
+        ],
+        borderColor: '#000',
+        backgroundColor: '#000',
+        fill: false,
+        },
+        {
+        label: 'Adjusted Savings Projection',
+        data: [
+          0,
+          20345,
+        ],
+        borderColor: '#E4BC2B',
+        backgroundColor: '#E4BC2B',
+        fill: false,
+      }]
+    },
+    options: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          fontColor: 'black',
+          fontSize: 16
+        }
+      },
+      title: {
+        display: true,
+        text: 'Savings Projection',
+        fontColor: '#000',
+        fontFamily: 'Bree Serif',
+        fontSize: 24
       }
     }
   });
