@@ -1199,6 +1199,16 @@
 
   updateCategoriesChart();
 
+  function openCategory(category) {
+    console.log('here2')
+    var mySpendTab = document.querySelector('#v-pills-mySpend-tab');
+    var activateMySpendTab = new bootstrap.Tab(mySpendTab)
+    activateMySpendTab.show();
+    // Apply filter for category clicked
+    document.getElementById('categorySelect').value = category;
+    filterData(dateFilter, category);
+  }
+
   function updateSpendCategoryProgress(multiplier) {
     var count = 1;
     var table = document.getElementById("categoriesTable");
@@ -1215,6 +1225,8 @@
     var html4a = '%</span></td></tr></tbody></table></div></div></td>'
     var htmlMiddle = '<td width="14%"></td>'
     var htmlEnd = '</tr><tr height="25px"></tr>'
+
+    var body = document.createElement("tbody");
     // var colourRef = matchCategoryColours();
     expenseCategories.forEach((category) => {
       if (category != 'Not Coded') {
@@ -1229,13 +1241,23 @@
           rowHTML = rowHTML.concat(htmlStart, html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a, htmlMiddle);
           count = 2;
         } else {
+          var row = document.createElement("tr");
+          var fillerRow = document.createElement("tr");
+          fillerRow.style.height = "25px";
           rowHTML = rowHTML.concat(html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a, htmlEnd);
+          row.innerHTML = rowHTML;
+          body.appendChild(row);
+          body.appendChild(fillerRow);
+          rowHTML = '';
           count = 1;
+          row.addEventListener('click', function(e) {
+            console.log('here');
+            openCategory(category)
+          });
+
         }
       }
     })
-    var body = document.createElement("tbody");
-    body.innerHTML = rowHTML;
     table.appendChild(body);
   }
   updateSpendCategoryProgress(1);
@@ -1277,7 +1299,7 @@
       if (categoryValue == 'All') {
         categoryValue = null;
       }
-      filterData(dateFilter, null);
+      filterData(dateFilter, categoryValue);
     });
   });
 
@@ -1298,6 +1320,8 @@
     console.log(dateFilter, filterSelect.value);
     filterData(dateFilter, filterSelect.value);
   })
+
+  
 
   populateCategorySelect(expenseCategories);
 
@@ -1418,7 +1442,7 @@
     //category value
     var html5 = '></div></td><td><div class="px-1"><b>Per</b><select id="';
     //select frequency ID
-    var html6 = '" name="budgetSelect" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week" selected>Week</option><option value="Fortnight">Fortnight</option><option value="Month">Month</option><option value="Year">Year</option></select></div></td></tr></table></td>';
+    var html6 = '" name="budgetSelect" class="form-select shadow-none budget-select" aria-label="Income Frequency"><option value="Week">Week</option><option value="Fortnight">Fortnight</option><option value="Month" selected>Month</option><option value="Year">Year</option></select></div></td></tr></table></td>';
     var htmlMiddle = '<td width="5%"></td>';
     var htmlEnd = '</tr><br>'
     
@@ -1514,6 +1538,14 @@
   populateCodeSpendRows();
   // populateCategorySelect(expenseCategories);
   // populateTransactions();
+
+  // function openCategory(category) {
+  //   var mySpendTab = document.querySelector('#v-pills-dashboard-tab');
+  //   var activateMySpendTab = new bootstrap.Tab(mySpendTab)
+  //   activateMySpendTab.show();
+  //   // Apply filter for category clicked
+  // }
+
 })()
 // id="categorySelect"
 
