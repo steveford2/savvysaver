@@ -1355,13 +1355,10 @@
         filterData(dateFilter, null);
         populateCodeSpendRows()
       })
-
-
     });
   }
 
   function populateCodeSpendRows() {
-    console.log('code spend rows');
     document.getElementById('codeSpendBody').innerHTML = '';
     var body = document.getElementById('codeSpendBody');
     var headerRow = document.createElement('tr');
@@ -1487,7 +1484,7 @@
   populateBudgetTables();
 
   var adjustedGoals = categoryGoals;
-  var income = 0;
+  var adjustedIncome = budgetedIncome;
 
   var frequencyLookUpVals = {
     'Week': 4.3,
@@ -1504,9 +1501,9 @@
         savingsProjection = savingsProjection - (categoryGoals[key] * 12);
       }
     }
-
-    chartBudget.data.datasets[0].data = [0, savingsProjection];
-    chartBudget.data.datasets[1].data = [0, savingsProjection];
+    var chartData = [0, savingsProjection];
+    chartBudget.data.datasets[0].data = chartData;
+    chartBudget.data.datasets[1].data = chartData;
     chartBudget.update();
   }
 
@@ -1519,7 +1516,7 @@
       var frequency = document.getElementById(freqID).value;
       var frequencyMultiplier = frequencyLookUpVals[frequency];
       if (input.id == 'Income') {
-        income = input.value * frequencyMultiplier;
+        adjustedIncome = input.value * frequencyMultiplier;
       } else {
         adjustedGoals[input.id] = input.value * frequencyMultiplier;
       }
@@ -1531,7 +1528,7 @@
       }
     }
 
-    adjustedAmmount = Math.round((income - adjustedAmmount) * 12);
+    adjustedAmmount = Math.round((adjustedIncome - adjustedAmmount) * 12);
     chartBudget.data.datasets[1].data = [0, adjustedAmmount];
     chartBudget.update();
   }
@@ -1549,7 +1546,12 @@
         sumAdjustedBudget();
       });
     });
-    console.log(adjustedGoals);
+    var saveButton = document.getElementById('btnSaveBudget');
+    saveButton.addEventListener("click", function(e) {
+      categoryGoals = adjustedGoals;
+      budgetedIncome = adjustedIncome;
+      setsavingsGraph();
+    });
   }
   addBudgetEventListeners();
 
