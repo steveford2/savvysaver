@@ -1546,6 +1546,12 @@
   //   // Apply filter for category clicked
   // }
 
+  var dashboardTabLoad = document.querySelector('#v-pills-dashboard-tab')
+  dashboardTabLoad.addEventListener('shown.bs.tab', function (event) {
+    document.getElementById('categorySelect').value = 'All';
+    filterData(dateFilter, null);
+  })
+
 })()
 // id="categorySelect"
 
