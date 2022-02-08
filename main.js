@@ -1273,33 +1273,33 @@
       var id = e.target.id;
       dateFilter = id;
       filterButtonsUpdate(id);
-      // var categoryValue = document.getElementById('categorySelect').value;
-      // if (categoryValue == 'All') {
-      //   categoryValue = null;
-      // }
+      var categoryValue = document.getElementById('categorySelect').value;
+      if (categoryValue == 'All') {
+        categoryValue = null;
+      }
       filterData(dateFilter, null);
     });
   });
 
-  // function populateCategorySelect(expenseCategories) {
-  //   var categorySelectElement = document.getElementById('categorySelect');
-  //   expenseCategories.forEach((catgory) => {
-  //     var option = document.createElement('Option');
-  //     option.value = catgory;
-  //     option.innerHTML = catgory;
-  //     categorySelectElement.appendChild(option);
-  //   })
-  // }
+  function populateCategorySelect(expenseCategories) {
+    var categorySelectElement = document.getElementById('categorySelect');
+    expenseCategories.forEach((catgory) => {
+      var option = document.createElement('Option');
+      option.value = catgory;
+      option.innerHTML = catgory;
+      categorySelectElement.appendChild(option);
+    })
+  }
 
-  // var filterSelect = document.getElementById('categorySelect');
+  var filterSelect = document.getElementById('categorySelect');
 
-  // filterSelect.addEventListener('change', function(e) {
-  //   console.log(filterButtons);
-  //   console.log(dateFilter, filterSelect.value);
-  //   filterData(dateFilter, filterSelect.value);
-  // })
+  filterSelect.addEventListener('change', function(e) {
+    console.log(filterButtons);
+    console.log(dateFilter, filterSelect.value);
+    filterData(dateFilter, filterSelect.value);
+  })
 
-  // populateCategorySelect(expenseCategories);
+  populateCategorySelect(expenseCategories);
 
   function populateTransactions(filteredTransactions) {
     document.getElementById('transactionsTable').innerHTML = '';
