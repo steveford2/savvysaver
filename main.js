@@ -57,19 +57,21 @@
 
   // Goals
   var categoryGoals = {
-    "Entertainment": 750,
-    "Groceries": 650,
-    "Transport": 400,
-    "Fitness/ Sport": 120,
-    "Dining Out": 350,
+    "Entertainment": 350,
+    "Groceries": 360,
+    "Transport": 350,
+    "Fitness/ Sport": 100,
+    "Dining Out": 200,
     "Travel": 200,
-    "Shopping": 400,
-    "Subscriptions": 100,
-    "Bills": 600,
-    "Rent/ Mortgage": 1050,
-    "General": 2500,
+    "Shopping": 350,
+    "Subscriptions": 80,
+    "Bills": 120,
+    "Rent/ Mortgage": 700,
+    "General": 200,
     "Savings": 0
   }
+
+  var budgetedIncome = 4000;
 
   // Charts
   var chartTypeSpendElement = document.getElementById('chartTypeSpend')
@@ -1493,6 +1495,22 @@
     'Month': 1,
     'Year': 0.0833
   }
+
+  function setsavingsGraph() {
+    var savingsProjection = budgetedIncome * 12;
+
+    for (const [key, value] of Object.entries(categoryGoals)) {
+      if (categoryGoals[key]) {
+        savingsProjection = savingsProjection - (categoryGoals[key] * 12);
+      }
+    }
+
+    chartBudget.data.datasets[0].data = [0, savingsProjection];
+    chartBudget.data.datasets[1].data = [0, savingsProjection];
+    chartBudget.update();
+  }
+
+  setsavingsGraph();
   
   function sumAdjustedBudget() {
     var inputs = document.getElementsByName('budgetInput');
@@ -1513,7 +1531,7 @@
       }
     }
 
-    adjustedAmmount = Math.round(income - adjustedAmmount);
+    adjustedAmmount = Math.round((income - adjustedAmmount) * 12);
     chartBudget.data.datasets[1].data = [0, adjustedAmmount];
     chartBudget.update();
   }
@@ -1538,13 +1556,6 @@
   populateCodeSpendRows();
   // populateCategorySelect(expenseCategories);
   // populateTransactions();
-
-  // function openCategory(category) {
-  //   var mySpendTab = document.querySelector('#v-pills-dashboard-tab');
-  //   var activateMySpendTab = new bootstrap.Tab(mySpendTab)
-  //   activateMySpendTab.show();
-  //   // Apply filter for category clicked
-  // }
 
   var dashboardTabLoad = document.querySelector('#v-pills-dashboard-tab')
   dashboardTabLoad.addEventListener('shown.bs.tab', function (event) {
