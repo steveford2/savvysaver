@@ -74,10 +74,10 @@
                   <option value="" selected>All Categories</option>
                 </select> -->
               </div>
-              <div id="spendChartsCarousel" class="net-spend carousel carousel-dark slide" data-bs-interval="false">
+              <div id="dashboardCarousel" class="net-spend carousel carousel-dark slide" data-bs-interval="false">
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#spendChartsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#spendChartsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -130,11 +130,11 @@
                     </table>
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#spendChartsCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#spendChartsCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
@@ -158,19 +158,52 @@
                   <option value="All" selected>All Categories</option>
                 </select>
               </div>
-              <table width="100%" class="net-spend">
-                <tbody class="my-3">
-                  <tr>
-                    <td width="65%">
-                      <canvas class="my-5 w-100" id="mySpendChartTypeCategories" width="300" height="200"></canvas>
-                    </td>
-                    <td width="35%">
-                      <div id="mySpendCategoryLabels">
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div id="mySpendCarousel" class="net-spend carousel carousel-dark slide" data-bs-interval="false">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#mySpendCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#mySpendCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <table width="100%">
+                      <tbody class="my-3">
+                        <tr>
+                          <td width="65%">
+                            <canvas class="my-5 w-100" id="mySpendChartTypeCategories" width="300" height="200"></canvas>
+                          </td>
+                          <td width="35%">
+                            <div id="mySpendCategoryLabels">
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="carousel-item">
+                    <table width="100%">
+                      <tbody class="my-3">
+                        <tr>
+                          <td width="65%">
+                            <canvas class="my-5 w-100" id="chartTypeCategories" width="300" height="200"></canvas>
+                          </td>
+                          <td width="35%">
+                            <div id="categoryLabels">
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mySpendCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mySpendCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
               <h2 class="h2 px-3 py-3">Transactions</h2>
               <div class="table-responsive net-spend">
                 <div class="p-4">
