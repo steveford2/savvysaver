@@ -182,7 +182,7 @@
 
   // eslint-disable-next-line no-unused-vars
   var mySpendPeriod = new Chart(mySpendPeriodElement, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: [
         'Living Costs',

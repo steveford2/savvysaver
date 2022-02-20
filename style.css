@@ -417,3 +417,8 @@ option {
 .budget-select {
   border: none !important;
 }
+
+.period-spend-chart {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
