@@ -178,6 +178,37 @@
     }
   });
 
+  var mySpendPeriodElement = document.getElementById('mySpendPeriodChart')
+
+  // eslint-disable-next-line no-unused-vars
+  var mySpendPeriod = new Chart(mySpendPeriodElement, {
+    type: 'line',
+    data: {
+      labels: [
+        'Living Costs',
+        'Luxury Spend',
+        'Annual Provisions',
+        'Savings',
+        'Difference'
+      ],
+      datasets: [{
+        data: [
+          15339,
+          21345,
+          18483,
+          24003,
+          0,
+        ],
+        backgroundColor: '#30b9b7',
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      }
+    }
+  });
+
   var chartBudgetElement = document.getElementById('budgetTrajectory')
   // eslint-disable-next-line no-unused-vars
   var chartBudget = new Chart(chartBudgetElement, {
@@ -1042,7 +1073,7 @@
     var end = new Date(endDateString).getTime()
     var result = processedTransactions.filter(d => {
       var time = new Date(d.Date).getTime();
-      if (filterCategory) {
+      if (filterCategory && filterCategory !== 'All') {
         var category = d.Category;
         return (start <= time && time <= end && category == filterCategory);
       } else {
@@ -1053,7 +1084,6 @@
   }
   var dateFilter = 'filterThisMonth';
   var filteredTransactions = filterTransactions(HCFilterValues[dateFilter].start, HCFilterValues[dateFilter].end, null);
-  console.log(filteredTransactions);
 
   function buildCategoryStats(filteredTransactions) {
 
@@ -1196,10 +1226,39 @@
     mySpendChartCategorySpend.update();
 
     buildCategoryLabels(categoriesLabels, colourRef);
+  }
+
+  function updatePeriodSpendChart() {
+    var datesData = [],
+        datesLabels = [],
+        periodVals = {};
+
+    filteredTransactions.forEach((transaction) => {
+      var dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+      var date = transaction.Date.toLocaleDateString('en-NZ', dateOptions);
+      var sum = transaction.Amount
+      if (periodVals[date]) {
+        periodVals[date] = periodVals[date] + sum
+      } else {
+        periodVals[date] = sum
+      }
+
+    });
+    for (const [key, value] of Object.entries(periodVals)) {
+      datesData.push(value);
+      datesLabels.push(key);
+    }
+
+    mySpendPeriod.data.labels.pop()
+    mySpendPeriod.data.datasets[0].data.pop(0);
+    mySpendPeriod.data.labels = datesLabels;
+    mySpendPeriod.data.datasets[0].data = datesData;
+    mySpendPeriod.update();
 
   }
 
   updateCategoriesChart();
+  updatePeriodSpendChart();
 
   function openCategory(category) {
     console.log('here2')
@@ -1289,6 +1348,7 @@
     sumGoalTypes(multiplier);
     updateSpendTypesChart();
     updateCategoriesChart();
+    updatePeriodSpendChart();
     updateSpendCategoryProgress(multiplier);
   }
 
@@ -1318,8 +1378,6 @@
   var filterSelect = document.getElementById('categorySelect');
 
   filterSelect.addEventListener('change', function(e) {
-    console.log(filterButtons);
-    console.log(dateFilter, filterSelect.value);
     filterData(dateFilter, filterSelect.value);
   })
 
@@ -1350,7 +1408,6 @@
       var categorySelect = document.getElementById(selectID);
 
       categorySelect.addEventListener('change', function(e) {
-        console.log("Change single category");
         updateSingleTransaction(transaction.TransactionID, categorySelect.value);
         filterData(dateFilter, null);
         populateCodeSpendRows()
@@ -1392,11 +1449,9 @@
 
         categorySelect.addEventListener('change', function(e) {
           categorySaveButton.disabled = false;
-          console.log("Change category");
         })
 
         categorySaveButton.addEventListener('click', function(e) {
-          console.log("Save category");
           updateMultipleTransactions(transaction.Details, categorySelect.value);
           filterData(dateFilter, null);
         })
