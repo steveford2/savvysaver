@@ -1426,7 +1426,11 @@
 
       categorySelect.addEventListener('change', function(e) {
         updateSingleTransaction(transaction.TransactionID, categorySelect.value);
-        filterData(dateFilter, null);
+        var categoryValue = document.getElementById('categorySelect').value;
+        if (categoryValue == 'All') {
+          categoryValue = null;
+        }
+        filterData(dateFilter, categoryValue);
         populateCodeSpendRows()
       })
     });
