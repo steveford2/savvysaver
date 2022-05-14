@@ -1261,7 +1261,6 @@
   updatePeriodSpendChart();
 
   function openCategory(category) {
-    console.log('here2')
     var mySpendTab = document.querySelector('#v-pills-mySpend-tab');
     var activateMySpendTab = new bootstrap.Tab(mySpendTab)
     activateMySpendTab.show();
@@ -1274,9 +1273,11 @@
     var count = 1;
     var table = document.getElementById("categoriesTable");
     table.innerHTML = "";
-    var rowHTML = ""
+    var category1 = "";
+    var td1HTML = "";
+    var td2HTML = "";
     var htmlStart = '<tr>'
-    var html1 = '<td class="net-spend-category" width="43%" height="140px"><div class="px-3"><div class="progress"><div class="progress-bar" role="progressbar" style="width: '
+    var html1 = '<td class="net-spend-category" width="43%" height="140px" name="category" id="test"><div class="p-3"><div class="progress"><div class="progress-bar" role="progressbar" style="width: ';
     var html1a = '%" aria-valuenow="'
     var html1b = '" aria-valuemin="0" aria-valuemax="100"></div></div><div class="p-1"><table><tbody><tr><td><svg width="60" height="60" fill="'
     var html1c = '" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="30"/></svg></td><td width="5px"></td><td><span class="net-spend-category-title"> '
@@ -1284,11 +1285,9 @@
     var html3 = ' / $'
     var html4 = '</span><br><span class="net-spend-category-percent"> '
     var html4a = '%</span></td></tr></tbody></table></div></div></td>'
-    var htmlMiddle = '<td width="14%"></td>'
     var htmlEnd = '</tr><tr height="25px"></tr>'
 
     var body = document.createElement("tbody");
-    // var colourRef = matchCategoryColours();
     expenseCategories.forEach((category) => {
       if (category != 'Not Coded') {
         var percent = '-';
@@ -1299,22 +1298,40 @@
         }
   
         if (count == 1) {
-          rowHTML = rowHTML.concat(htmlStart, html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a, htmlMiddle);
+          td1HTML = td1HTML.concat(html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a);
+          category1 = category;
+
           count = 2;
         } else {
           var row = document.createElement("tr");
+          row.innerHTML = htmlStart;
           var fillerRow = document.createElement("tr");
           fillerRow.style.height = "25px";
-          rowHTML = rowHTML.concat(html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a, htmlEnd);
-          row.innerHTML = rowHTML;
+          var td1 = document.createElement("td");
+          var tdM = document.createElement("td");
+          var td2 = document.createElement("td");
+          td1.classList.add('net-spend-category');
+          td1.id = category1;
+          td2.classList.add('net-spend-category');
+          td2.id = category;
+          tdM.style.width = '14%';
+          td1.innerHTML = td1HTML;
+          td2.innerHTML = td2HTML.concat(html1, percentProgressBar, html1a, percentProgressBar, html1b, colourRef[category], html1c, category, html2, categoryStats[category], html3, categoryGoals[category]  * multiplier, html4, percent, html4a, htmlEnd);
+          row.appendChild(td1);
+          row.appendChild(tdM);
+          row.appendChild(td2);
           body.appendChild(row);
           body.appendChild(fillerRow);
-          rowHTML = '';
-          count = 1;
-          row.addEventListener('click', function(e) {
-            console.log('here');
-            openCategory(category)
+          td1.addEventListener('click', function(e) {
+            openCategory(e.path[2].id)
           });
+          td2.addEventListener('click', function(e) {
+            openCategory(e.path[2].id)
+          });
+          td1HTML = '';
+          td2HTML = '';
+          count = 1;
+          category1 = '';
 
         }
       }
