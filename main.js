@@ -147,37 +147,6 @@
     }
   });
 
-  var mySpendChartCategorySpendElement = document.getElementById('mySpendChartTypeCategories')
-
-  // eslint-disable-next-line no-unused-vars
-  var mySpendChartCategorySpend = new Chart(mySpendChartCategorySpendElement, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        'Living Costs',
-        'Luxury Spend',
-        'Annual Provisions',
-        'Savings',
-        'Difference'
-      ],
-      datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          0,
-        ],
-        backgroundColor: ['#ff567a','#ff9345','#ffc559','#30b9b7','#ffffff'],
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      }
-    }
-  });
-
   var mySpendPeriodElement = document.getElementById('mySpendPeriodChart')
 
   // eslint-disable-next-line no-unused-vars
@@ -1188,22 +1157,14 @@
   function buildCategoryLabels(labels, matchedColours) {
     var html1 = '<svg fill="',
         html2 = '" width="14" height="14" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="5"/></svg> ',
-        legendDiv = document.getElementById("categoryLabels"),
-        mySpendLegendDiv = document.getElementById("mySpendCategoryLabels");
+        legendDiv = document.getElementById("categoryLabels");
     legendDiv.innerHTML = "";
-    mySpendLegendDiv.innerHTML = "";
     labels.forEach((label) => {
       var element = document.createElement("span");
       element.classList.add("chart-legend");
       element.innerHTML = html1.concat(matchedColours[label], html2, label);
-      var mySpendElement = document.createElement("span");
-      mySpendElement.classList.add("chart-legend");
-      mySpendElement.innerHTML = html1.concat(matchedColours[label], html2, label);
       legendDiv.appendChild(element);
       legendDiv.appendChild(document.createElement('br'));
-      mySpendLegendDiv.appendChild(mySpendElement);
-      mySpendLegendDiv.appendChild(document.createElement('br'));
-      
     })
   }
 
@@ -1222,8 +1183,6 @@
     chartCategorySpend.data.datasets[0].backgroundColor = categoryColours;
     chartCategorySpend.data.datasets[0].data = categoriesData;
     chartCategorySpend.update();
-    mySpendChartCategorySpend.data = chartCategorySpend.data;
-    mySpendChartCategorySpend.update();
 
     buildCategoryLabels(categoriesLabels, colourRef);
   }
