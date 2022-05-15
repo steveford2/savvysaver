@@ -1369,7 +1369,7 @@
     var td1HTML = "";
     var td2HTML = "";
     var htmlStart = '<tr>'
-    var html1 = '<td class="net-spend-category" width="43%" height="140px" name="category" id="test"><div class="p-3"><div class="progress"><div class="progress-bar" role="progressbar" style="width: ';
+    var html1 = '<td width="43%" height="140px" name="category" id="test"><div class="net-spend-category p-3"><div class="progress"><div class="progress-bar" role="progressbar" style="width: ';
     var html1a = '%" aria-valuenow="'
     var html1b = '" aria-valuemin="0" aria-valuemax="100"></div></div><div class="p-1"><table><tbody><tr><td><svg width="60" height="60" fill="'
     var html1c = '" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="30"/></svg></td><td width="5px"></td><td><span class="net-spend-category-title"> '
@@ -1402,9 +1402,9 @@
           var td1 = document.createElement("td");
           var tdM = document.createElement("td");
           var td2 = document.createElement("td");
-          td1.classList.add('net-spend-category');
+          // td1.classList.add('net-spend-category');
           td1.id = category1;
-          td2.classList.add('net-spend-category');
+          // td2.classList.add('net-spend-category');
           td2.id = category;
           tdM.style.width = '14%';
           td1.innerHTML = td1HTML;

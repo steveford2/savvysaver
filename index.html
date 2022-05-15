@@ -57,90 +57,92 @@
           </div>
         </div>
 
-        <main class="ms-sm-auto col-lg-10 bg-main">
+        <main class="main-background ms-sm-auto col-lg-10 bg-main mt-5 mb-2">
           <div class="tab-content" id="v-pills-tabContent">
             <!-- Dashboard tab content -->
             <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
-              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-                <h1 class="h1 px-3">Net Spend</h1>
-              </div>
-              <div class="px-3 pb-3" id="filters">
-                <l class="filter-label">Filter Data</l>
-                <button name="filter" id="filterThisMonth" type="button" class="btn btn-filter btn-active mt-2">This Month</button>
-                <button name="filter" id="filterLastMonth" type="button" class="btn btn-filter mt-2">Last Month</button>
-                <button name="filter" id="filterLast3Months" type="button" class="btn btn-filter mt-2">Last 3 Months</button>
-                <button name="filter" id="filterLastYear" type="button" class="btn btn-filter mt-2">Last 12 Months</button>
-                <!-- <select id="categorySelect" class="btn btn-filter select-filter mt-2">
-                  <option value="" selected>All Categories</option>
-                </select> -->
-              </div>
-              <div id="dashboardCarousel" class="net-spend carousel carousel-dark slide" data-bs-interval="false">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                  <h1 class="h1 px-3">Net Spend</h1>
                 </div>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <table width="100%">
-                      <tbody class="my-3">
-                        <tr>
-                          <td width="65%">
-                            <canvas class="my-5 w-100" id="chartTypeSpend" width="300" height="200"></canvas>
-                          </td>
-                          <td width="35%">
-                            <div>
-                              <span class="chart-description">Outside:</span><br>
-                              <span class="chart-description"><b>Actual</b> Spend</span><br>
-                              <span class="chart-description">Inside:</span><br>
-                              <span class="chart-description"><b>Planned</b> Spend</span><br>
-                            </div>
-                            <div class="my-4"></div>
-                            <div>
-                              <span class="chart-legend"><svg fill="#ff567a" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5"/>
-                              </svg> Living Costs</span><br>
-                              <span class="chart-legend"><svg fill="#ff9345" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5"/>
-                              </svg> Luxury Spend</span><br>
-                              <span class="chart-legend"><svg fill="#ffc559" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5"/>
-                              </svg> Annual Provisions</span><br>
-                              <span class="chart-legend"><svg fill="#30b9b7" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5"/>
-                              </svg> Savings</span><br>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <div id="dashboardCarousel" class="net-spend carousel carousel-dark slide" data-bs-interval="false">
+                  <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#dashboardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                   </div>
-                  <div class="carousel-item">
-                    <table width="100%">
-                      <tbody class="my-3">
-                        <tr>
-                          <td width="65%">
-                            <canvas class="my-5 w-100" id="chartTypeCategories" width="300" height="200"></canvas>
-                          </td>
-                          <td width="35%">
-                            <div id="categoryLabels">
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <table width="100%">
+                        <tbody class="my-3">
+                          <tr>
+                            <td width="65%">
+                              <canvas class="my-5 w-100" id="chartTypeSpend" width="300" height="200"></canvas>
+                            </td>
+                            <td width="35%">
+                              <div>
+                                <span class="chart-description">Outside:</span><br>
+                                <span class="chart-description"><b>Actual</b> Spend</span><br>
+                                <span class="chart-description">Inside:</span><br>
+                                <span class="chart-description"><b>Planned</b> Spend</span><br>
+                              </div>
+                              <div class="my-4"></div>
+                              <div>
+                                <span class="chart-legend"><svg fill="#ff567a" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="5" cy="5" r="5"/>
+                                </svg> Living Costs</span><br>
+                                <span class="chart-legend"><svg fill="#ff9345" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="5" cy="5" r="5"/>
+                                </svg> Luxury Spend</span><br>
+                                <span class="chart-legend"><svg fill="#ffc559" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="5" cy="5" r="5"/>
+                                </svg> Annual Provisions</span><br>
+                                <span class="chart-legend"><svg fill="#30b9b7" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="5" cy="5" r="5"/>
+                                </svg> Savings</span><br>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="carousel-item">
+                      <table width="100%">
+                        <tbody class="my-3">
+                          <tr>
+                            <td width="65%">
+                              <canvas class="my-5 w-100" id="chartTypeCategories" width="300" height="200"></canvas>
+                            </td>
+                            <td width="35%">
+                              <div id="categoryLabels">
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#dashboardCarousel" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-              <h2 class="h2 px-3 py-3">Spend by Category</h2>
-              <table id="categoriesTable" width="100%"></table>
+                <div class="p-3" id="filters">
+                  <l class="filter-label">Filter Data</l>
+                  <button name="filter" id="filterThisMonth" type="button" class="btn btn-filter btn-active mt-2">This Month</button>
+                  <button name="filter" id="filterLastMonth" type="button" class="btn btn-filter mt-2">Last Month</button>
+                  <button name="filter" id="filterLast3Months" type="button" class="btn btn-filter mt-2">Last 3 Months</button>
+                  <button name="filter" id="filterLastYear" type="button" class="btn btn-filter mt-2">Last 12 Months</button>
+                  <!-- <select id="categorySelect" class="btn btn-filter select-filter mt-2">
+                    <option value="" selected>All Categories</option>
+                  </select> -->
+                </div>
+                <h2 class="h2 px-3 py-3">Spend by Category</h2>
+                <table id="categoriesTable" width="100%"></table>
+
             </div>
 
             <!-- My Spend tab content -->
