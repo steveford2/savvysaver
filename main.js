@@ -1582,16 +1582,16 @@
       }
     });
 
-    var expensesSavedHTML = document.getElementById('expensesSavedText');
+    var transactionsSavedHTML = document.getElementById('transactionsSavedText');
     if (count === 1) {
-      expensesSavedHTML.innerHTML = '1 expense updated!';
+      transactionsSavedHTML.innerHTML = '1 transaction updated!';
     } else {
-      expensesSavedHTML.innerHTML = String(count) + ' expenses updated!';
+      transactionsSavedHTML.innerHTML = String(count) + ' transactions updated!';
     }
 
-    var expensesSavedToastHTML = document.getElementById('expensesSavedToast');
-    var expensesSavedToast = new bootstrap.Toast(expensesSavedToastHTML);
-    expensesSavedToast.show();
+    var transactionsSavedToastHTML = document.getElementById('transactionsSavedToast');
+    var transactionsSavedToast = new bootstrap.Toast(transactionsSavedToastHTML);
+    transactionsSavedToast.show();
   }
 
   function updateSingleTransaction(transactionID, value) {
