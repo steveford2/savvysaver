@@ -1187,23 +1187,73 @@
     buildCategoryLabels(categoriesLabels, colourRef);
   }
 
+  function getDateOfISOWeek (week, year) {
+    var simple = new Date(year, 0, 1 + (week - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() -7);
+    else
+        ISOweekStart.setDate(simple.getDate() + 1 - simple.getDay());
+    return ISOweekStart;
+  }
+
   function updatePeriodSpendChart() {
     var datesData = [],
-        datesLabels = [],
-        periodVals = {};
+        weeksData = {},
+        monthsData = {},
+        datesLabels = [];
+    var startDate = HCFilterValues[dateFilter].start,
+        endDate = HCFilterValues[dateFilter].end;
+    // create month objects
+    var d = new Date(endDate);
+    d.setMonth(d.getMonth() - 1);
+    for (var i=0; i<=11; i++) {
+      d.setMonth(d.getMonth() + 1);
+      var month = d.toLocaleString('default', { month: 'short' });
+      monthsData[month] = 0;
+    }
+    //create week objects
+    var start = moment(startDate),
+        end   = moment(endDate);
+
+    var allMondays = [];
+    let tmp = start.clone().day(1);
+
+    if( tmp.isSameOrAfter(start, 'd') ){
+      allMondays.push(tmp.format('D MMM'));
+    }
+    while( tmp.add(7, 'days').isBefore(end) ){
+      allMondays.push(tmp.format('D MMM'));
+    }
+
+    allMondays.forEach((date) => {
+      weeksData[date] = 0;
+    });
 
     filteredTransactions.forEach((transaction) => {
       var dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
       var date = transaction.Date.toLocaleDateString('en-NZ', dateOptions);
-      var sum = transaction.Amount
-      if (periodVals[date]) {
-        periodVals[date] = periodVals[date] + sum
-      } else {
-        periodVals[date] = sum
+      var sum = transaction.Amount;
+      var month = transaction.Date.toLocaleDateString('en-NZ', {month: 'short'});
+      var week = moment(date).week();
+      var year = date.split(' ')[2];
+      var startOfWeek = getDateOfISOWeek(week, year);
+      var startOfWeekLabel = startOfWeek.toLocaleDateString('en-NZ', { month: 'short', day: 'numeric' });
+      if (startOfWeekLabel in weeksData) {
+        weeksData[startOfWeekLabel] = weeksData[startOfWeekLabel] + sum;
       }
-
+      if (month in monthsData) {
+        monthsData[month] = monthsData[month] + sum;
+      }
     });
-    for (const [key, value] of Object.entries(periodVals)) {
+
+    var chartData = weeksData;
+    if (dateFilter == 'filterLastYear') {
+      chartData = monthsData;
+    }
+
+    for (const [key, value] of Object.entries(chartData)) {
       datesData.push(value);
       datesLabels.push(key);
     }
@@ -1599,6 +1649,7 @@
     document.getElementById('categorySelect').value = 'All';
     filterData(dateFilter, null);
   })
+
 
 })()
 // id="categorySelect"
