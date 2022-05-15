@@ -87,6 +87,7 @@
         'Difference'
       ],
       datasets: [{
+        label: "Planned Spend",
         data: [
           15339,
           21345,
@@ -95,8 +96,8 @@
           0,
         ],
         backgroundColor: ['#ff567a','#ff9345','#ffc559','#30b9b7','#ffffff'],
-        },
-        {
+      },{
+        label: "Actual Spend",
         data: [
           16834,
           7869,
@@ -119,11 +120,21 @@
               });
             }
         }
+      },
+      onClick: function(e) {
+        var dataset = this.getElementAtEvent(e)[0];
+        if (dataset != undefined) {
+          var index = dataset._index;
+          var datasetIndex = dataset._datasetIndex;
+          if (datasetIndex === 1) {
+            openPlanBudget();
+          } else {
+            openCategory('All');
+          }
+        }
       }
-    }
+     }
   });
-  
-
 
   var chartCategorySpendElement = document.getElementById('chartTypeCategories')
 
@@ -160,6 +171,18 @@
                 return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
               });
             }
+        }
+      },
+      onClick: function(e) {
+        var dataset = this.getElementAtEvent(e)[0];
+        if (dataset != undefined) {
+          var index = dataset._index;
+          var label = this.data.labels[index];
+          if (label === 'Not Coded') {
+            openCategory('All');
+          } else {
+            openCategory(label);
+          }
         }
       }
     }
@@ -1332,6 +1355,12 @@
     filterData(dateFilter, category);
   }
 
+  function openPlanBudget() {
+    var planBudgetTab = document.querySelector('#v-pills-planBudget-tab');
+    var activateplanBudgetTab = new bootstrap.Tab(planBudgetTab)
+    activateplanBudgetTab.show();
+  }
+
   function updateSpendCategoryProgress(multiplier) {
     var count = 1;
     var table = document.getElementById("categoriesTable");
@@ -1386,10 +1415,10 @@
           body.appendChild(row);
           body.appendChild(fillerRow);
           td1.addEventListener('click', function(e) {
-            openCategory(e.path[2].id)
+            openCategory(e.path[2].id);
           });
           td2.addEventListener('click', function(e) {
-            openCategory(e.path[2].id)
+            openCategory(e.path[2].id);
           });
           td1HTML = '';
           td2HTML = '';
