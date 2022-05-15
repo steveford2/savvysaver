@@ -1573,12 +1573,25 @@
   }
 
   function updateMultipleTransactions(transactionName, value) {
+    var count = 0;
     processedTransactions.forEach((transaction) => {
       if (transaction.Details === transactionName && transaction.Category === 'Not Coded')  {
         transaction.Category = value;
         document.getElementById(transaction.TransactionID).remove();
+        count = count + 1
       }
     });
+
+    var expensesSavedHTML = document.getElementById('expensesSavedText');
+    if (count === 1) {
+      expensesSavedHTML.innerHTML = '1 expense updated!';
+    } else {
+      expensesSavedHTML.innerHTML = String(count) + ' expenses updated!';
+    }
+
+    var expensesSavedToastHTML = document.getElementById('expensesSavedToast');
+    var expensesSavedToast = new bootstrap.Toast(expensesSavedToastHTML);
+    expensesSavedToast.show();
   }
 
   function updateSingleTransaction(transactionID, value) {
