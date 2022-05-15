@@ -110,6 +110,15 @@
     options: {
       legend: {
         display: false
+      },
+      tooltips: {
+        callbacks: {
+            label: function(tooltipItem, data) {
+              return data['labels'][tooltipItem['index']] + ': $' + Number(data['datasets'][tooltipItem.datasetIndex]['data'][tooltipItem['index']]).toFixed(0).replace(/./g, function(c, i, a) {
+                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+              });
+            }
+        }
       }
     }
   });
@@ -143,6 +152,15 @@
     options: {
       legend: {
         display: false
+      },
+      tooltips: {
+        callbacks: {
+            label: function(tooltipItem, data) {
+              return data['labels'][tooltipItem['index']] + ': $' + Number(data['datasets'][0]['data'][tooltipItem['index']]).toFixed(0).replace(/./g, function(c, i, a) {
+                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+              });
+            }
+        }
       }
     }
   });
@@ -174,6 +192,24 @@
     options: {
       legend: {
         display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: function(value, index, values) {
+              return value.toLocaleString("en-US",{style:"currency", currency:"USD", maximumFractionDigits: 0});
+            }
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+            label: function(tooltipItem, data) {
+                return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                });
+            }
+        }
       }
     }
   });
@@ -223,6 +259,24 @@
         fontColor: '#000',
         fontFamily: 'Bree Serif',
         fontSize: 24
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: function(value, index, values) {
+              return value.toLocaleString("en-US",{style:"currency", currency:"USD", maximumFractionDigits: 0});
+            }
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+            label: function(tooltipItem, data) {
+                return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                });
+            }
+        }
       }
     }
   });
