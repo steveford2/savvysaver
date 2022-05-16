@@ -383,21 +383,18 @@ option {
 }
 
 .code-headings {
-  font-family: Poppins;
+  font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  color: #268050;
 }
 
 .code-inner {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  background-color: white;
-  border-radius: 1rem;
+  background: #FCFCFC;
+  border: 1px solid #268050;
+  border-radius: 15px;
 }
 
 .code-amount {

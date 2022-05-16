@@ -160,15 +160,17 @@
                   <option value="All" selected>All Categories</option>
                 </select>
               </div>
-              <table width="100%" class="net-spend mt-5">
-                <tbody>
-                  <tr>
-                    <td width="65%">
-                      <canvas class="px-5 py-3" id="mySpendPeriodChart" width="300" height="200"></canvas>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="net-spend mt-5">
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td width="65%">
+                        <canvas class="my-5 w-100" id="mySpendPeriodChart" width="300" height="200"></canvas>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <h2 class="h2 px-3 py-3">Transactions</h2>
               <div class="table-responsive net-spend">
@@ -196,15 +198,17 @@
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <h1 class="h1 px-3">My Budget</h1>
               </div>
-              <table width="100%" class="net-spend mt-5">
-                <tbody>
-                  <tr>
-                    <td width="65%">
-                      <canvas class="px-5 py-3" id="budgetTrajectory" width="300" height="200"></canvas>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="net-spend mt-5">
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td width="65%">
+                        <canvas class="my-5 w-100" id="budgetTrajectory" width="300" height="200"></canvas>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <br>
               <h2 class="h2 px-3 py-3">Income</h2>
               <table id="incomeTable">
@@ -260,7 +264,7 @@
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <h1 class="h1 px-3">Uncoded Expenses</h1>
               </div>
-              <div class="p-4  mt-5 net-spend">
+              <div>
                 <table>
                   <tbody id="codeSpendBody"></tbody>
                 </table>
