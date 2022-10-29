@@ -285,6 +285,22 @@
             <div class="tab-pane fade" id="v-pills-uploadBankData" role="tabpanel" aria-labelledby="v-pills-uploadBankData-tab">
               <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <h1 class="h1 px-3">Upload Bank Data</h1>
+                <button class="btn btn-primary" data-csvbox disabled onclick="importer.openModal();">Import</button>
+                  <script type="text/javascript" src="https://js.csvbox.io/script.js"></script>
+                    <script type="text/javascript">
+                       function callback(result, data) {
+                           if(result){
+                               console.log("Sheet uploaded successfully");
+                               console.log(data.row_success + " rows uploaded");
+                           }else{
+                               console.log("There was some problem uploading the sheet");
+                           }
+                       }
+                       let importer = new CSVBoxImporter("DMsLl9baZhW7l5rVIOr49zQ3wroKRc",{}, callback);
+                       importer.setUser({
+                           user_id: 'default123'
+                       });
+                    </script>
               </div>
             </div>
             <div class="tab-pane fade" id="v-pills-myAccount" role="tabpanel" aria-labelledby="v-pills-myAccount-tab">
