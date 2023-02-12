@@ -74,68 +74,77 @@
   var budgetedIncome = 4000;
 
   // Charts
-  var chartTypeSpendElement = document.getElementById('chartTypeSpend')
-  // eslint-disable-next-line no-unused-vars
-  var chartTypeSpend = new Chart(chartTypeSpendElement, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        'Living Costs',
-        'Luxury Spend',
-        'Annual Provisions',
-        'Savings',
-        'Difference'
-      ],
-      datasets: [{
-        label: "Planned Spend",
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          0,
-        ],
-        backgroundColor: ['#ff567a','#ff9345','#ffc559','#30b9b7','#ffffff'],
-      },{
-        label: "Actual Spend",
-        data: [
-          16834,
-          7869,
-          23653,
-          12645,
-          18169
-        ],
-        backgroundColor: ['#ff567a','#ff9345','#ffc559','#30b9b7','#ffffff'],
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      tooltips: {
-        callbacks: {
-            label: function(tooltipItem, data) {
-              return data['labels'][tooltipItem['index']] + ': $' + Number(data['datasets'][tooltipItem.datasetIndex]['data'][tooltipItem['index']]).toFixed(0).replace(/./g, function(c, i, a) {
-                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-              });
-            }
-        }
-      },
-      onClick: function(e) {
-        var dataset = this.getElementAtEvent(e)[0];
-        if (dataset != undefined) {
-          var index = dataset._index;
-          var datasetIndex = dataset._datasetIndex;
-          if (datasetIndex === 1) {
-            openPlanBudget();
-          } else {
-            openCategory('All');
-          }
-        }
-      }
-     }
-  });
-
+var chartTypeSpendElement = document.getElementById('chartTypeSpend')
+// eslint-disable-next-line no-unused-vars
+var chartTypeSpend = new Chart(chartTypeSpendElement, {
+type: 'bar',
+data: {
+labels: [
+'Living Costs',
+'Luxury Spend',
+'Annual Provisions',
+'Savings',
+'Difference'
+],
+datasets: [{
+label: "Planned Spend",
+data: [
+15339,
+21345,
+18483,
+24003,
+0,
+],
+backgroundColor: '#ff567a',
+stack: 'Stack 0'
+},{
+label: "Actual Spend",
+data: [
+16834,
+7869,
+23653,
+12645,
+18169
+],
+backgroundColor: '#30b9b7',
+stack: 'Stack 0'
+}]
+},
+options: {
+scales: {
+xAxes: [{
+stacked: true,
+}],
+yAxes: [{
+stacked: true
+}]
+},
+legend: {
+display: false
+},
+tooltips: {
+callbacks: {
+label: function(tooltipItem, data) {
+return data['labels'][tooltipItem['index']] + ': $' + Number(data['datasets'][tooltipItem.datasetIndex]['data'][tooltipItem['index']]).toFixed(0).replace(/./g, function(c, i, a) {
+return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+});
+}
+}
+},
+onClick: function(e) {
+var dataset = this.getElementAtEvent(e)[0];
+if (dataset != undefined) {
+var index = dataset._index;
+var datasetIndex = dataset._datasetIndex;
+if (datasetIndex === 1) {
+openPlanBudget();
+} else {
+openCategory('All');
+}
+}
+}
+}
+});
   var chartCategorySpendElement = document.getElementById('chartTypeCategories')
 
   // eslint-disable-next-line no-unused-vars
