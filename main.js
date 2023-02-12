@@ -149,7 +149,7 @@ openCategory('All');
 
   // eslint-disable-next-line no-unused-vars
   var chartCategorySpend = new Chart(chartCategorySpendElement, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
       labels: [
         'Living Costs',
